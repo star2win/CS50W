@@ -1,0 +1,119 @@
+h1, h2 {
+    color: #872052;
+    text-align: center;
+    }
+p {
+    color: blue;
+}
+/*
+div {
+    background-color: teal;
+    width: 100px;
+    height: 400px;
+    margin: 30px;
+    padding: 20px;
+
+    font-family: Arial, sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    
+    border: 3px dotted red;
+}
+*/
+table {
+    border: 2px solid black;
+    border-collapse: collapse;
+    width: 50%;
+}
+th, td {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+th {
+    background-color: lightgray;
+}
+#one {
+    font-size: 40px;
+}
+#two {
+    font-size: 20px;
+}
+.name {
+    font-style: italic;
+}
+ol > li {
+    color: red;
+}
+input[type=text] {
+    background-color: red;
+}
+input[type=number] {
+    background-color: yellow;
+}
+button {
+    width: 200px;
+    height: 50px;
+    font-size: 24px;
+    background-color: green;
+}
+button:hover {
+    background-color: orange;
+}
+a::before {
+    content: "\21d2 Click here: ";
+    font-weight: bold;
+}
+p::selection {
+    color: red;
+    background-color: yellow;
+}
+@media print {
+    .screen-only {
+        display: none;
+    }
+}
+@media (min-width: 551px) {
+    body {
+        background-color: red;
+    }
+    h1::before {
+        content:  "Welcome to My Web Page!";
+    }
+}
+@media (max-width: 550px) {
+    body {
+        background-color: blue;
+    }
+    h1::before {
+        content: "Welcome!";
+    }
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+.container > div {
+    background-color: springgreen;
+    font-size: 20px;
+    margin: 20px;
+    padding: 20px;
+    width: 300px;
+}
+.grid {
+    background-color: green;
+    display: grid;
+    padding: 20px;
+    column-gap: 20px;
+    row-gap: 10px;
+    grid-template-columns: 200px auto auto;
+}
+.grid-item {
+    background-color: white;
+    font-size: 20px;
+}
