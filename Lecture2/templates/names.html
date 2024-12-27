@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Website!</title>
+        <style>
+            body {
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Names</h1>
+        <ul>
+            {% for name in names %}
+                <li>{{name}}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

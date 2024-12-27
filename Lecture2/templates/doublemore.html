@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    Third page example
+{% endblock %}
+
+{% block body %}
+<p>
+    This is a sample message on third page.
+</p>
+    <a href="{{ url_for('index') }}">Go back to home page</a><br>
+    <a href="{{ url_for('more') }}">Go to second page</a>
+{% endblock %}
