@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from models import *
 
 db_user = os.environ.get("DB_USER")
@@ -63,3 +63,24 @@ def flight(flight_id):
     #passengers = Passenger.query.filter_by(flight_id=flight_id).all()
     passengers = flight.passengers
     return render_template("flight.html", flight=flight, passengers=passengers)
+
+@app.route("/api/flights/<int:flight_id>")
+def flight_api(flight_id):
+    """Return details about a single flight."""
+
+    # Make sure flight exists.
+    flight = Flight.query.get(flight_id)
+    if flight is None:
+        return jsonify({"error": "Invalid flight_id"}), 422
+    
+    # Get all passengers.
+    passengers = flight.passengers
+    names = []
+    for passenger in passengers:
+        names.append(passenger.name)
+    return jsonify({
+        "origin": flight.origin,
+        "destination": flight.destination,
+        "duration": flight.duration,
+        "Passengers": names})
+    
