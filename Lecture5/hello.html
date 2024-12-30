@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            /*
+            // Function to say hello
+            function hello() {
+                alert('Hello!');
+            }
+            */
+
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector('#form').onsubmit = function() {
+                    const name = document.querySelector('#name').value;
+                    alert(`Hello ${name}!`);
+                };
+            })
+
+
+        </script>
+        <title>My Website</title>
+    </head>
+    <body>
+        <!-- 
+        <h1>Welcome!</h1>
+        <button onClick="hello()">Click Here!</button>
+        -->
+        <form id="form">
+            <input id="name" autocomplete="off" autofocus placeholder="Name" type="text">
+            <input type="submit">
+        </form>
+    </body>
+</html>
+ 
+<!--
+* onclick
+* onmouseover
+* onkeydown
+* onkeyup
+* onload
+* onblur
+* ...
+-->
