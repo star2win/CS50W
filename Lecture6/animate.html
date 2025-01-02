@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head\>
+        <title>My Webpage</title>
+        <style>
+            @keyframes grow-move {
+                /* First two examples:
+                from {
+                    font-size: 20px;
+                    left: 0%;
+                }
+                to {
+                    font-size: 100px;
+                    left: 50%;
+                }
+                */
+                0% {
+                    font-size: 20px;
+                    left: 0%;
+                }
+                50% {
+                    font-size: 100px;
+                    left: 50%;
+                }
+                100% {
+                    font-size: 20px;
+                    left: 0%;
+                }
+            }
+
+            h1 {
+                position: relative;
+                animation-name: grow-move;
+                animation-duration: 3s;
+                animation-fill-mode: forwards;
+                animation-iteration-count: infinite;
+            } 
+
+        </style>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const h1 = document.querySelector('h1');
+                h1.style.animationPlayState = 'paused';
+                document.querySelector('button').onclick = () => {
+                    if (h1.style.animationPlayState == 'paused')
+                        h1.style.animationPlayState = 'running';
+                    else
+                        h1.style.animationPlayState = 'paused';
+                };
+            });
+        </script>
+
+    </head>
+    <body>
+        <button>Click Here!</button>
+        <h1>Welcome!</h1>
+    </body>
+</html>
