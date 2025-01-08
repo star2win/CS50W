@@ -22,9 +22,6 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-
-    - name: Change working directory to Lecture8/airline
-      working-directory: ./CS50W/Lecture8/airline
         
     - name: Install Dependencies
       run: |
