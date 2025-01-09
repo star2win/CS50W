@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres
+    environment:
+    - POSTGRES_DB=${POSTGRES_DB}
+    - POSTGRES_USER=${POSTGRES_USER}
+    - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+
+  migration:
+    build: .
+    command: python3 manage.py migrate
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+  
+  web:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - migration
+    environment:
+      - DB_HOST=db # Overrides localhost when running in Docker
+      - DATABASE_URL=${DATABASE_URL}
+
+volumes:
+  postgres_data:

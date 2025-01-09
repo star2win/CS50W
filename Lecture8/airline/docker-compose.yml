@@ -1,0 +1,54 @@
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  migration:
+    build: .
+    #command: python3 manage.py migrate
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py init_admin"
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - DJANGO_ADMIN_USER=${DJANGO_ADMIN_USER}
+      - DJANGO_ADMIN_EMAIL=${DJANGO_ADMIN_EMAIL}
+      - DJANGO_ADMIN_PASSWORD=${DJANGO_ADMIN_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - DJANGO_ADMIN_USER=${DJANGO_ADMIN_USER}
+      - DJANGO_ADMIN_EMAIL=${DJANGO_ADMIN_EMAIL}
+      - DJANGO_ADMIN_PASSWORD=${DJANGO_ADMIN_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
